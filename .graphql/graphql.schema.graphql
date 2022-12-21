@@ -1,0 +1,460 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+directive @isAuthenticated on FIELD_DEFINITION
+
+directive @isAdministrator on FIELD_DEFINITION
+
+directive @isAdministratorOrUserIsMe on FIELD_DEFINITION
+
+directive @isTrusted on FIELD_DEFINITION
+
+directive @hasAnyRoleOf(default: String, roles: [String!]!) on FIELD_DEFINITION
+
+type AccessToken {
+  expiresAt: DateTime
+  refreshToken: String
+  token: String!
+  userId: String!
+}
+
+type CheckEmail {
+  isAvailable: Boolean
+  isBlacklisted: Boolean
+  isCorporate: Boolean
+}
+
+type ConnectionPageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+}
+
+type File {
+  contentType: String
+  createdDate: DateTime!
+  deletedDate: DateTime
+  deviceId: String
+  extension: String
+  id: ID!
+  modifiedDate: DateTime!
+  name: String!
+  notes: String
+  privateData: FilePrivateData
+  size: Int
+  status: FileStatus!
+  statusDate: DateTime!
+  statusMessage: String
+  storageDownloadUrl: String
+  storageId: String
+  storageType: FileStorageType!
+  storageUploadUrl: String
+  thumbnailUrl: String
+  userId: String
+}
+
+type FileConnection {
+  edges: [FileEdge!]!
+  pageInfo: ConnectionPageInfo!
+  totalCount: Int!
+}
+
+type FileDownloadUrl {
+  expirationDate: DateTime!
+  id: ID!
+  url: String!
+}
+
+type FileEdge {
+  cursor: String!
+  node: File!
+}
+
+type FilePrivateData {
+  notes: String
+  status: FilePrivateStatus!
+  statusDate: DateTime!
+  statusMessage: String
+  userId: String
+}
+
+type FileUploadUrl {
+  contentType: String!
+  expirationDate: DateTime!
+  fields: JSONObject
+  headers: JSONObject
+  id: ID!
+  method: String!
+  url: String!
+}
+
+type Log {
+  createdDate: DateTime!
+  deletedDate: DateTime
+  description: String
+  id: ID!
+  level: LogLevel!
+  modifiedDate: DateTime!
+  source: LogSource!
+  title: String!
+  userId: String
+}
+
+type LogConnection {
+  edges: [LogEdge!]!
+  pageInfo: ConnectionPageInfo!
+  totalCount: Int!
+}
+
+type LogEdge {
+  cursor: String!
+  node: Log!
+}
+
+type Mutation {
+  _: Void
+  authenticate(identity: String!, payload: AuthenticationPayload!, type: AuthenticationType!): AccessToken
+  checkEmail(email: String!): CheckEmail
+  confirmEmail(token: String!): Void
+  createLog(log: CreateLogInput!): Log
+  createProduct(product: CreateProductInput!): Product
+  createPurchase(payload: PurchasePayload, purchase: CreatePurchaseInput!): Purchase
+  createUser(image: Upload, user: CreateUserInput!): User
+  deleteFile(id: ID!): Boolean!
+  deleteProduct(id: String!): Boolean!
+  deletePurchase(id: ID!): Boolean!
+  deleteUser(id: ID!): Boolean!
+  downloadUrl(id: ID!): FileDownloadUrl!
+  finishUpload(id: ID!): File!
+  refreshTokens(token: String!): AccessToken
+  removeMe(id: ID!): Boolean!
+  requestResetPassword(email: String!): Void
+  resendEmailConfirmation(email: String!): Void
+  resetPassword(password: String!, token: String!): Void
+  signIn(email: String!, generateRefreshToken: Boolean = false, password: String!): AccessToken
+  signUp(email: String!, firstName: String!, lastName: String, password: String!, upload: Upload): AccessToken
+  updateFile(file: UpdateFileInput!, id: ID!): File
+  updatePassword(password: String!, userId: String!): Void
+  updateProduct(id: String!, product: UpdateProductInput!): Product
+  updatePurchase(id: ID!, purchase: UpdatePurchaseInput!): Purchase
+  updateUser(id: ID!, image: Upload, user: UpdateUserInput!): User
+  uploadOverwriteUrl(contentType: String, extension: String, id: ID!, name: String!, tags: JSONObject): FileUploadUrl!
+  uploadUrl(contentType: String, deviceId: String, extension: String, name: String!, tags: JSONObject): FileUploadUrl!
+}
+
+type Product {
+  createdDate: DateTime!
+  deletedDate: DateTime
+  id: String!
+  modifiedDate: DateTime!
+  title: String!
+}
+
+type PublicUser {
+  bio: String
+  country: String
+  firstName: String!
+  id: ID!
+  imageData(height: Float, width: Float): Byte
+  imageUrl: String
+  lastName: String
+  nickName: String
+}
+
+type Purchase {
+  active: Boolean!
+  cancellationDate: DateTime
+  createdDate: DateTime!
+  deletedDate: DateTime
+  expiresAt: DateTime
+  id: ID!
+  modifiedDate: DateTime!
+  price: Float
+  productId: String!
+  purchaseDate: DateTime!
+  quantity: Int
+  transactionId: String!
+  type: PurchaseType!
+  userId: String!
+}
+
+type PurchaseConnection {
+  edges: [PurchaseEdge!]!
+  pageInfo: ConnectionPageInfo!
+  totalCount: Int!
+}
+
+type PurchaseEdge {
+  cursor: String!
+  node: Purchase!
+}
+
+type Query {
+  _: Void
+  file(id: ID!): File
+  files(deviceId: String, extension: String, first: Int, name: String, offset: Int, orderBy: FileOrder, status: [FileStatus!], userId: String): FileConnection!
+  logs(endDate: DateTime, first: Int, level: [LogLevel!], offset: Int, orderBy: LogOrder, source: [LogSource!], startDate: DateTime, text: String): LogConnection!
+  me: User
+  myPurchases(active: Boolean, productId: String): PurchaseConnection!
+  products: [Product]!
+  purchase(id: ID!): Purchase
+  reset: Void
+  statistics: Statistics!
+  user(id: ID!): User
+  users(email: String, first: Int, firstName: String, lastName: String, offset: Int, orderBy: UserOrder, role: [UserRole!], status: [UserStatus!], text: String): UserConnection!
+  version: String
+}
+
+type Statistics {
+  totalUsers(role: UserRole): Int!
+}
+
+type Subscription {
+  _: Void
+}
+
+type User {
+  area: String
+  bio: String
+  birthday: String
+  country: String
+  createdDate: DateTime!
+  deletedDate: DateTime
+  email: String
+  firstName: String!
+  id: ID!
+  imageData(height: Float, width: Float): Byte
+  imageUrl: String
+  lastName: String
+  modifiedDate: DateTime!
+  nickName: String
+  purchases: [Purchase]!
+  role: UserRole
+  status: UserStatus
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: ConnectionPageInfo!
+  totalCount: Int!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User!
+}
+
+enum AuthenticationType {
+  APPLE
+  CUSTOM
+}
+
+enum ConnectionOrderDirection {
+  ASC
+  DESC
+}
+
+enum FileOrderField {
+  CREATED_DATE
+  DEVICE
+  EXTENSION
+  NAME
+  PRIVATE_STATUS
+  STATUS
+  UPDATED_DATE
+  USER
+}
+
+enum FilePrivateStatus {
+  DEFAULT
+  STATUS1
+  STATUS2
+}
+
+enum FileStatus {
+  INVALID
+  PENDING_UPLOAD
+  READY
+}
+
+enum FileStorageType {
+  AMAZON_S3
+  FILE_SYSTEM
+  GOOGLE_CLOUD
+}
+
+enum LogLevel {
+  ERROR
+  INFO
+  WARNING
+}
+
+enum LogOrderField {
+  CREATED_DATE
+  LEVEL
+  SOURCE
+  TITLE
+}
+
+enum LogSource {
+  APP
+  BACKOFFICE
+  SERVER
+  UNKNOWN
+}
+
+enum PurchaseType {
+  APPLE
+  CUSTOM
+}
+
+enum UserOrderField {
+  AREA
+  BIO
+  BIRTHDAY
+  COUNTRY
+  CREATED_DATE
+  EMAIL
+  FIRSTNAME
+  LASTNAME
+  NICKNAME
+  ROLE
+  STATUS
+  UPDATED_DATE
+}
+
+enum UserRole {
+  ADMINISTRATOR
+  BASIC
+  TRUSTED
+}
+
+enum UserStatus {
+  ACTIVE
+  BLOCKED
+  PENDING
+}
+
+"The `Byte` scalar type represents byte value as a Buffer"
+scalar Byte
+
+"A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."
+scalar DateTime
+
+"The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
+scalar JSON
+
+"The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf)."
+scalar JSONObject
+
+scalar Upload
+
+"Represents NULL values"
+scalar Void
+
+input AuthenticationPayload {
+  apple: AuthenticationPayloadForApple
+  custom: AuthenticationPayloadForCustom
+}
+
+input AuthenticationPayloadForApple {
+  authorizationCode: String!
+  email: String
+  firstName: String
+  identityToken: String!
+  lastName: String
+  realUserStatus: Int
+}
+
+input AuthenticationPayloadForCustom {
+  email: String!
+  password: String!
+}
+
+input CreateLogInput {
+  description: String
+  level: LogLevel = ERROR
+  source: LogSource = UNKNOWN
+  title: String!
+  userId: String
+}
+
+input CreateProductInput {
+  id: String
+  title: String!
+}
+
+input CreatePurchaseInput {
+  productId: String!
+  type: PurchaseType!
+  userId: String
+}
+
+input CreateUserInput {
+  area: String
+  bio: String
+  birthday: String
+  country: String
+  email: String!
+  firstName: String!
+  lastName: String
+  nickName: String
+  password: String!
+  role: UserRole
+}
+
+input FileOrder {
+  direction: ConnectionOrderDirection!
+  field: FileOrderField!
+}
+
+input LogOrder {
+  direction: ConnectionOrderDirection!
+  field: LogOrderField!
+}
+
+input PurchasePayload {
+  apple: PurchasePayloadForApple
+  custom: PurchasePayloadForCustom
+}
+
+input PurchasePayloadForApple {
+  receiptData: String!
+}
+
+input PurchasePayloadForCustom {
+  _: String
+}
+
+input UpdateFileInput {
+  notes: String
+}
+
+input UpdateProductInput {
+  title: String!
+}
+
+input UpdatePurchaseInput {
+  active: Boolean
+}
+
+input UpdateUserInput {
+  area: String
+  bio: String
+  birthday: String
+  country: String
+  email: String
+  firstName: String
+  lastName: String
+  nickName: String
+  role: UserRole
+}
+
+input UserOrder {
+  direction: ConnectionOrderDirection!
+  field: UserOrderField!
+}

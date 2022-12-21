@@ -1,0 +1,61 @@
+import {en_US as baseCoreLocale} from "../core/locales/en_US";
+import {Locale as CoreLocale} from "../core/locales/Locale";
+import {CoreHelper} from "../core/utils/CoreHelper";
+import {Locale} from "./Locale";
+
+const uiLocale: Omit<Locale, keyof CoreLocale> = {
+  "About-contactUs": "Contact us",
+  "About-privacyPolicy": "Privacy policy",
+  "About-termsAndConditions": "Terms and conditions",
+  "Common-cancel": "Cancel",
+  "Common-loadingText": "Loading...",
+  "Common-name": "Name",
+  "Common-saveChanges": "Save changes",
+  "Common-success": "Success",
+  "DrawerContent-about": "About",
+  "DrawerContent-home": "Home",
+  "DrawerContent-profile": "Profile",
+  "DrawerContent-settings": "Settings",
+  "ForgotPassword-description": "Enter your email address below. We'll send you a link to reset your password.",
+  "ForgotPassword-emailInputLabel": "Email",
+  "ForgotPassword-send": "Send",
+  "ForgotPassword-successfulResponseAlertMessage": "If the email you submitted was associated to an account, you will receive steps to follow in order to reset your password.",
+  "ForgotPassword-successfulResponseAlertTitle": "Check your email",
+  "ForgotPassword-unsuccessfulResponseAlertMessage": "There was an unexpected error. Please try again",
+  "ForgotPassword-unsuccessfulResponseAlertTitle": "We’re sorry",
+  "Home-title": "Home",
+  "Input-hide": "hide",
+  "Input-show": "show",
+  "Profile-firstName": "First name",
+  "Profile-lastName": "Last name",
+  "Profile-success": "Profile Information updated",
+  "Profile-title": "Profile Information",
+  "Settings-enableBiometrics": "Enable Biometrics",
+  "Settings-enableBiometricsSettingsError": "To enable biometrics, please go to settings, give permissions to the app and then try again.",
+  "Settings-goToSettings": "Go to settings",
+  "Settings-title": "Settings",
+  "SignIn-emailInputLabel": "Email",
+  "SignIn-passwordInputLabel": "Password",
+  "SignIn-submitButtonLabel": "Log in",
+  "SignIn-unsuccessfulSignInMessage": "Sign in unsuccessful",
+  "SignUp-emailInputLabel": "Email",
+  "SignUp-firstNameInputLabel": "First name",
+  "SignUp-lastNameInputLabel": "Last name",
+  "SignUp-passwordInputLabel": "Password",
+  "SignUp-submitButtonLabel": "Sign Up",
+  "SignUp-successfulSignUpAlertMessage": "Please follow the instructions sent to you by email to activate the account.",
+  "SignUp-successfulSignUpAlertTitle": "Success",
+  "SignUp-title": "Sign up",
+  "SignUp-unsuccessfulSignUpAlertMessage": "Sorry, something went wrong.",
+  "SignUp-unsuccessfulSignUpAlertTitle": "Error",
+  "Welcome-forgotPassword": "Forgot password",
+  "Welcome-signIn": "Sign in instead",
+  "Welcome-signInHeading": "Already have an account?",
+  "Welcome-signUp": "Sign up",
+  "Welcome-title": "Welcome!",
+  "Welcome-welcomeMessage": "Welcome {name}!",
+};
+
+const coreLocale: Partial<CoreLocale> = {};
+
+CoreHelper.mergeWith(baseCoreLocale, CoreHelper.mergeWith(coreLocale, uiLocale));

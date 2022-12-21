@@ -1,0 +1,21 @@
+<resources>
+  <style name="SplashScreenAnimation">
+    <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+  </style>
+
+  <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+<!--    <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>-->
+    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <item name="android:windowDisablePreview">true</item>
+    <item name="android:windowAnimationStyle">@style/SplashScreenAnimation</item>
+    <item name="colorPrimaryDark">@android:color/white</item>
+    <item name="android:windowBackground">@android:color/white</item>
+    <item name="android:textColor">@android:color/black</item>
+  </style>
+
+  <style name="BootTheme" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenBackground">@color/bootsplash_background</item>
+    <item name="windowSplashScreenAnimatedIcon">@mipmap/bootsplash_logo</item>
+    <item name="postSplashScreenTheme">@style/AppTheme</item>
+  </style>
+</resources>

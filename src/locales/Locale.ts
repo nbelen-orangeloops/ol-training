@@ -1,0 +1,60 @@
+import {LocaleParams as CoreLocaleParams} from "../core/locales/Locale";
+
+export type LocaleParams = CoreLocaleParams & {
+  "About-contactUs": {};
+  "About-privacyPolicy": {};
+  "About-termsAndConditions": {};
+  "Common-cancel": {};
+  "Common-loadingText": {};
+  "Common-name": {};
+  "Common-saveChanges": {};
+  "Common-success": {};
+  "DrawerContent-about": {};
+  "DrawerContent-home": {};
+  "DrawerContent-profile": {};
+  "DrawerContent-settings": {};
+  "ForgotPassword-description": {};
+  "ForgotPassword-emailInputLabel": {};
+  "ForgotPassword-send": {};
+  "ForgotPassword-successfulResponseAlertMessage": {};
+  "ForgotPassword-successfulResponseAlertTitle": {};
+  "ForgotPassword-unsuccessfulResponseAlertTitle": {};
+  "ForgotPassword-unsuccessfulResponseAlertMessage": {};
+  "Home-title": {};
+  "Input-hide": {};
+  "Input-show": {};
+  "Profile-firstName": {};
+  "Profile-lastName": {};
+  "Profile-success": {};
+  "Profile-title": {};
+  "Settings-enableBiometrics": {};
+  "Settings-enableBiometricsSettingsError": {};
+  "Settings-goToSettings": {};
+  "Settings-title": {};
+  "SignIn-emailInputLabel": {};
+  "SignIn-passwordInputLabel": {};
+  "SignIn-submitButtonLabel": {};
+  "SignIn-unsuccessfulSignInMessage": {};
+  "SignUp-emailInputLabel": {};
+  "SignUp-firstNameInputLabel": {};
+  "SignUp-lastNameInputLabel": {};
+  "SignUp-passwordInputLabel": {};
+  "SignUp-submitButtonLabel": {};
+  "SignUp-successfulSignUpAlertMessage": {};
+  "SignUp-successfulSignUpAlertTitle": {};
+  "SignUp-title": {};
+  "SignUp-unsuccessfulSignUpAlertMessage": {};
+  "SignUp-unsuccessfulSignUpAlertTitle": {};
+  "Welcome-forgotPassword": {};
+  "Welcome-signIn": {};
+  "Welcome-signInHeading": {};
+  "Welcome-signUp": {};
+  "Welcome-title": {};
+  "Welcome-welcomeMessage": {};
+};
+
+export type LocaleKey = keyof LocaleParams;
+
+export type Locale = Record<LocaleKey, string> & {
+  code: string;
+};
