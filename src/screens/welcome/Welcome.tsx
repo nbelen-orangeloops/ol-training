@@ -1,62 +1,51 @@
-import {StackScreenProps} from "@react-navigation/stack";
-import {observer} from "mobx-react-lite";
 import * as React from "react";
-import {TextStyle, View} from "react-native";
+import {View, Image, Text, TextInput} from "react-native";
 import {TouchableOpacity} from "react-native-gesture-handler";
-import {useSafeAreaInsets} from "react-native-safe-area-context";
+import {SafeAreaView} from "react-native-safe-area-context";
 
-import {Button} from "../../components/button/Button";
-import {Text} from "../../components/text/Text";
-import {NavigationHelper} from "../../navigation/NavigationHelper";
-import {PublicStackParamList} from "../../navigation/Public";
+import ToDoListItem from "../../components/task/ToDoListItem";
 import {useDynamicStyleSheet} from "../../style/darkMode";
-import {UIHelper} from "../../utils/UIHelper";
 import {themedStyles} from "./Welcome.styles";
 
-export type WelcomeProps = StackScreenProps<PublicStackParamList, "Welcome">;
-
-export const Welcome: React.FC<WelcomeProps> = observer((props) => {
+export const Welcome = () => {
   const styles = useDynamicStyleSheet(themedStyles);
-  const safeAreaInsets = useSafeAreaInsets();
 
-  const handleSignUp = React.useCallback(() => {
-    NavigationHelper.navigateTo({
-      screen: "Public",
-      params: {screen: "SignUp"},
-    });
-  }, []);
+  const [task, setTask] = React.useState("");
+  const [count, setCount] = React.useState(0);
+  const [taskItems, setTaskItems] = React.useState<string[]>([]);
 
-  const handleSignIn = React.useCallback(() => {
-    NavigationHelper.navigateTo({
-      screen: "Public",
-      params: {screen: "SignIn"},
-    });
-  }, []);
-
-  const handleForgotPassword = React.useCallback(() => {
-    NavigationHelper.navigateTo({
-      screen: "Public",
-      params: {screen: "ForgotPassword"},
-    });
-  }, []);
+  const HandleAdd = () => {
+    <ToDoListItem ToDo={task} />;
+    setTaskItems([...taskItems, task]);
+    setTask("");
+  };
 
   return (
-    <View style={styles.container}>
-      <Text style={[styles.title as TextStyle, {marginTop: safeAreaInsets.top}]}>{UIHelper.formatMessage("Welcome-title")}</Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.row}>
+        <Text style={styles.text}>Tasks</Text>
+        <TouchableOpacity style={styles.cleanButton}>
+          <Image source={require("../../assets/trashCan.png")} />
+          <Text style={styles.textWhite}>Clean</Text>
+        </TouchableOpacity>
+      </View>
 
-      <Button containerStyle={styles.signUpButton} onPress={handleSignUp}>
-        {UIHelper.formatMessage("Welcome-signUp")}
-      </Button>
+      <View>
+        <Text style={{fontFamily: "Arial", fontStyle: "italic"}}>3 items left</Text>
+      </View>
 
-      <Text style={styles.signInHeading}>{UIHelper.formatMessage("Welcome-signInHeading")}</Text>
+      <View>
+        {taskItems.map((item) => {
+          return <ToDoListItem ToDo={item} />;
+        })}
+      </View>
 
-      <TouchableOpacity onPress={handleSignIn} containerStyle={styles.signInButton}>
-        <Text style={styles.signInText as TextStyle}>{UIHelper.formatMessage("Welcome-signIn")}</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={handleForgotPassword} containerStyle={[styles.forgotPasswordButton, {marginBottom: safeAreaInsets.bottom + 20}]}>
-        <Text style={styles.forgotPasswordText as TextStyle}>{UIHelper.formatMessage("Welcome-forgotPassword")}</Text>
-      </TouchableOpacity>
-    </View>
+      <View style={styles.inputWrapper}>
+        <TextInput style={styles.input} placeholder="Write a task" value={task} onChangeText={(text) => setTask(text)} />
+        <TouchableOpacity onPress={() => HandleAdd()}>
+          <Image source={require("../../assets/add.png")} />
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
-});
+};

@@ -33,5 +33,5 @@
     "types": ["node"]
   },
   "exclude": ["node_modules", "babel.config.js", "metro.config.js"],
-  "include": ["*.js", ".*.js", "src/**/*.ts", "src/**/*.tsx"]
+  "include": ["*.js", ".*.js", "src/**/*.ts", "src/**/*.tsx", "src/screens/welcome/Welcome.jsx"]
 }

@@ -4,7 +4,6 @@ import * as React from "react";
 import {Alert, View} from "react-native";
 import {useSafeAreaInsets} from "react-native-safe-area-context";
 
-import MainLogo from "../../assets/companyLogo.svg";
 import {Button} from "../../components/button/Button";
 import {Input} from "../../components/input/Input";
 import {KeyboardAwareScrollView} from "../../components/keyboardawarescrollview/KeyboardAwareScrollView";
@@ -41,13 +40,9 @@ export const SignIn: React.FC = observer(() => {
 
   return (
     <View style={styles.wrapper}>
-      <View style={styles.backLogoContainer}>
-        <MainLogo style={styles.backLogo} />
-      </View>
+      <View style={styles.backLogoContainer}></View>
 
       <KeyboardAwareScrollView scrollEnabled={true} contentContainerStyle={[styles.scrollViewContentContainer, {marginLeft: safeAreaInsets.left, marginRight: safeAreaInsets.right}]} keyboardShouldPersistTaps="handled">
-        <MainLogo style={[styles.mainLogo, {marginTop: safeAreaInsets.top + headerHeight}]} />
-
         <View style={styles.inputContainer}>
           <Input
             {...emailFormInput.inputProps}
