@@ -1,47 +1,51 @@
 import * as React from "react";
-import {Image, Text, View} from "react-native";
-import {TouchableOpacity} from "react-native-gesture-handler";
+import { Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-import {themedStyles} from "../../screens/welcome/Welcome.styles";
-import {useDynamicStyleSheet} from "../../style/darkMode";
+import Circle from "../../assets/circle.svg";
+import CircleMarked from "../../assets/circleMarked.svg";
+import { ToDo } from "../../core/models/ToDo";
+import { themedStyles } from "../../screens/welcome/Welcome.styles";
+import { useDynamicStyleSheet, DynamicValue } from "../../style/darkMode";
+import { variables } from "../../style/variables";
 
-const ToDoListItem = (props: any) => {
+const ToDoCompletedIcon = <CircleMarked />;
+const ToDoNotCompletedIcon = <Circle />;
+
+const ToDoListItem = (props: {
+  todo: ToDo;
+  onCompletedChange: (completed: boolean, id: string) => void;
+}) => {
   const styles = useDynamicStyleSheet(themedStyles);
-  const [taskCompleted, setTaskCompleted] = React.useState(false);
+  const { todo, onCompletedChange } = props;
 
-  const HandleCheckmark = () => {
-    setTaskCompleted(!taskCompleted);
+  const { title, completed, id } = todo;
+
+  const HandlePress = () => {
+    onCompletedChange(completed, id);
   };
 
-  if (taskCompleted === false) {
-    return (
-      <>
-        <View style={styles.listItem}>
-          <TouchableOpacity onPress={HandleCheckmark}>
-            <Image source={require("../../assets/circle.png")} />
-          </TouchableOpacity>
-          <Text style={{fontFamily: "Arial", paddingLeft: 5}}>{props.ToDo}</Text>
-        </View>
-        <View style={{borderBottomColor: "#ccc", borderBottomWidth: 1, width: "100%", height: 1, paddingTop: 15}} />
-      </>
-    );
-  } else {
-    return (
-      <>
-        <View style={styles.listItem}>
-          <TouchableOpacity onPress={HandleCheckmark}>
-            <Image source={require("../../assets/checkmark.png")} />
-          </TouchableOpacity>
-          <Text style={{fontFamily: "Arial", fontStyle: "italic", textDecorationLine: "line-through", paddingLeft: 5}}>{props.ToDo}</Text>
-        </View>
-        <View style={{borderBottomColor: "#ccc", borderBottomWidth: 1, width: "100%", height: 1, paddingTop: 15}} />
-      </>
-    );
-  }
+  return (
+    <View style={styles.todoListFilterWrapper}>
+      <View style={styles.listItem}>
+        <TouchableOpacity onPress={HandlePress}>
+          {completed ? ToDoCompletedIcon : ToDoNotCompletedIcon}
+        </TouchableOpacity>
+        <Text style={completed ? styles.completed : styles.notCompleted}>
+          {title}
+        </Text>
+      </View>
+      <View
+        style={{
+          borderBottomColor: "#ccc",
+          borderBottomWidth: 1,
+          width: "100%",
+          height: 1,
+          paddingTop: 15,
+        }}
+      />
+    </View>
+  );
 };
 
-// return (
-//     <View>
-//         {/* <IsCompleted value={taskCompleted}/> */}
-//     </View>
 export default ToDoListItem;
