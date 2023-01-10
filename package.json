@@ -75,7 +75,9 @@
     "axios": "1.2.1",
     "babel-plugin-module-resolver": "4.1.0",
     "base-x": "4.0.0",
+    "cocoapods": "^0.0.0",
     "date-fns": "2.29.3",
+    "deprecated-react-native-prop-types": "^4.0.0",
     "graphql": "16.6.0",
     "lodash": "4.17.21",
     "mobx": "6.7.0",
@@ -97,9 +99,12 @@
     "react-native-reanimated": "2.13.0",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "3.18.2",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^13.6.0",
     "react-native-tab-view": "3.3.0",
     "react-native-vector-icons": "^9.2.0",
+    "react-native-webview": "^11.26.0",
+    "react-native-youtube-iframe": "^2.2.2",
     "uuid": "9.0.0"
   },
   "scripts": {
