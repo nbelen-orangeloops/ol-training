@@ -2,30 +2,47 @@ import React, { useState, useRef } from "react";
 import { View, Dimensions, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Carousel, { Pagination } from "react-native-snap-carousel";
-import YoutubePlayer from "react-native-youtube-iframe";
+import WebView from "react-native-webview";
 
 export const SLIDER_WIDTH = Dimensions.get("window").width + 30;
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.8);
+export const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 
 const images = [
-  "https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c2thdGVib2FyZGluZ3xlbnwwfHwwfHw%3D&w=1000&q=80",
-  "https://images.pexels.com/photos/58729/pexels-photo-58729.jpeg?cs=srgb&dl=pexels-salvio-bhering-58729.jpg&fm=jpg",
-  "https://images.ctfassets.net/3s5io6mnxfqz/5ZHWhb7IZYugQE6g9AiAb3/82664bc995fc0694d2ab2734d841c695/AdobeStock_266317440.jpeg",
-  "https://www.youtube.com/watch?v=ReAmjdNyMJA",
+  {
+    category: "img",
+    url: "https://images.unsplash.com/photo-1520045892732-304bc3ac5d8e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c2thdGVib2FyZGluZ3xlbnwwfHwwfHw%3D&w=1000&q=80",
+  },
+  {
+    category: "img",
+    url: "https://images.pexels.com/photos/58729/pexels-photo-58729.jpeg?cs=srgb&dl=pexels-salvio-bhering-58729.jpg&fm=jpg",
+  },
+  {
+    category: "img",
+    url: "https://images.ctfassets.net/3s5io6mnxfqz/5ZHWhb7IZYugQE6g9AiAb3/82664bc995fc0694d2ab2734d841c695/AdobeStock_266317440.jpeg",
+  },
+  { category: "video", url: "https://www.youtube.com/watch?v=ReAmjdNyMJA" },
 ];
 
 const renderItem = ({ item }: any) => {
-  if (item.url.includes("youtube")) {
-    const videoId = item.url.split("=")[1];
+  if (item.category === "video") {
+    const newUrl = item.url.replace("watch?v=", "embed/");
     return (
       <View
         style={{
           width: "100%",
+          height: 300,
           borderRadius: 20,
-          alignItems: "center",
         }}
       >
-        <YoutubePlayer height={300} play={true} videoId={videoId} />
+        <WebView
+          source={{ uri: newUrl }}
+          style={{ width: 400, height: 300 }}
+          mediaPlaybackRequiresUserAction={true}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          automaticallyAdjustContentInsets={false}
+          mixedContentMode="always"
+        />
       </View>
     );
   } else {
@@ -49,15 +66,16 @@ const renderItem = ({ item }: any) => {
 export const CarouselComp = () => {
   const [index, setIndex] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
+  // const [stopAutoPlay, setStopAutoPlay] = useState(false);
   const isCarousel = useRef(null);
 
-  const data = images.map((item: string, idx: number) => {
-    return { id: idx, url: item };
+  const data = images.map((item, idx: number) => {
+    return { ...item, id: idx };
   });
 
   return (
-    <View>
-      <TouchableOpacity onPress={() => setAutoPlay(!autoPlay)}>
+    <View style={{ width: "100%" }}>
+      <TouchableOpacity onPress={() => setAutoPlay(false)}>
         <Carousel
           ref={isCarousel}
           data={data}
@@ -69,6 +87,7 @@ export const CarouselComp = () => {
           loop={true}
           autoplay={autoPlay}
           autoplayInterval={3000}
+          enableMomentum={true}
         />
       </TouchableOpacity>
       <Pagination

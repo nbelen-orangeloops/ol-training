@@ -57,8 +57,6 @@ export const ToDos = () => {
     setTaskItems(newTaskItems);
   }
 
-  console.log(taskItems.map((item) => item.id));
-
   return (
     <>
       <View style={styles.container}>
