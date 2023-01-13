@@ -75,21 +75,19 @@ export const CarouselComp = () => {
 
   return (
     <View style={{ width: "100%" }}>
-      <TouchableOpacity onPress={() => setAutoPlay(false)}>
-        <Carousel
-          ref={isCarousel}
-          data={data}
-          renderItem={renderItem}
-          layout="default"
-          sliderWidth={SLIDER_WIDTH}
-          itemWidth={ITEM_WIDTH}
-          onSnapToItem={(index: number) => setIndex(index)}
-          loop={true}
-          autoplay={autoPlay}
-          autoplayInterval={3000}
-          enableMomentum={true}
-        />
-      </TouchableOpacity>
+      <Carousel
+        ref={isCarousel}
+        data={data}
+        renderItem={renderItem}
+        layout="default"
+        sliderWidth={SLIDER_WIDTH}
+        itemWidth={ITEM_WIDTH}
+        onSnapToItem={(index: number) => setIndex(index)}
+        loop={true}
+        autoplay={autoPlay}
+        autoplayInterval={3000}
+        lockScrollWhileSnapping={true}
+      />
       <Pagination
         dotsLength={data.length}
         activeDotIndex={index}
