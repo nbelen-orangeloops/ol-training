@@ -3,9 +3,7 @@ import * as React from "react";
 import RNBootSplash from "react-native-bootsplash";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-// import { CarouselComp } from "./components/carousel/CarouselData";
 import { StackDemo } from "./screens/stackdemo/StackDemo";
-// import { Welcome } from "./screens/welcome/Welcome";
 import { AppStore } from "./stores/AppStore";
 import { DarkModeProvider } from "./style/darkMode";
 export const App: React.FC<React.PropsWithChildren<{}>> = observer((props) => {
@@ -41,8 +39,6 @@ export const App: React.FC<React.PropsWithChildren<{}>> = observer((props) => {
     <DarkModeProvider>
       <SafeAreaProvider>
         <StackDemo />
-        {/* <Welcome />
-        <CarouselComp /> */}
       </SafeAreaProvider>
     </DarkModeProvider>
   );

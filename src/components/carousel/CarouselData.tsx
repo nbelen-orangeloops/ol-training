@@ -56,11 +56,12 @@ const renderItem = ({ item }: any) => {
           width: "100%",
           height: 300,
           borderRadius: 20,
+          paddingLeft: 40,
         }}
       >
         <WebView
           source={{ uri: newUrl }}
-          style={{ width: "100%", height: 300 }}
+          style={{ width: "90%", height: 300 }}
           mediaPlaybackRequiresUserAction={true}
           javaScriptEnabled={true}
           domStorageEnabled={true}
@@ -80,7 +81,7 @@ const renderItem = ({ item }: any) => {
       >
         <Image
           source={{ uri: item.url }}
-          style={{ width: "100%", height: 300 }}
+          style={{ width: "80%", height: 300 }}
         />
       </View>
     );
@@ -99,22 +100,28 @@ export const CarouselComp = () => {
     <View
       style={{
         width: "100%",
+        height: 400,
         alignItems: "center",
+        justifyContent: "center",
+        alignContent: "center",
+        paddingTop: 100,
       }}
     >
-      <Carousel
-        ref={isCarousel}
-        data={data}
-        renderItem={renderItem}
-        layout="stack"
-        sliderWidth={SLIDER_WIDTH}
-        itemWidth={ITEM_WIDTH}
-        onSnapToItem={(index: number) => setIndex(index)}
-        loop={true}
-        autoplay={true}
-        autoplayInterval={3000}
-        lockScrollWhileSnapping={true}
-      />
+      <View>
+        <Carousel
+          ref={isCarousel}
+          data={data}
+          renderItem={renderItem}
+          layout="stack"
+          sliderWidth={SLIDER_WIDTH}
+          itemWidth={ITEM_WIDTH}
+          onSnapToItem={(index: number) => setIndex(index)}
+          loop={true}
+          autoplay={true}
+          autoplayInterval={3000}
+          lockScrollWhileSnapping={true}
+        />
+      </View>
       <View style={{ padding: 20 }}>
         <PaginationDot
           activeDotColor={"#FC8C27"}

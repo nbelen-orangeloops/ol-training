@@ -3,7 +3,6 @@ import { variables } from "../../style/variables";
 
 export const themedStyles = new DynamicStyleSheet({
   container: {
-    flex: 1,
     height: "100%",
     width: "100%",
   },
@@ -62,6 +61,8 @@ export const themedStyles = new DynamicStyleSheet({
     flex: 1,
     width: "100%",
     flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
   },
   todoListFilter: {
     width: "100%",
@@ -92,7 +93,7 @@ export const themedStyles = new DynamicStyleSheet({
   },
   footer: {
     width: "100%",
-    bottom: 0,
+    bottom: 20,
   },
   footerButtonPress: {
     backgroundColor: "#ED7303",
