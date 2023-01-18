@@ -60,7 +60,7 @@ const renderItem = ({ item }: any) => {
       >
         <WebView
           source={{ uri: newUrl }}
-          style={{ width: 400, height: 300 }}
+          style={{ width: "100%", height: 300 }}
           mediaPlaybackRequiresUserAction={true}
           javaScriptEnabled={true}
           domStorageEnabled={true}

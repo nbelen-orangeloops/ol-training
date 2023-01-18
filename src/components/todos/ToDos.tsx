@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Alert } from "react-native";
+import { View, Alert, Button } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
 import ToDoListItem from "../../components/task/ToDoListItem";
@@ -12,7 +12,7 @@ import { ToDo } from "../../core/models/ToDo";
 import { themedStyles } from "../../screens/welcome/Welcome.styles";
 import { useDynamicStyleSheet } from "../../style/darkMode";
 
-export const ToDos = () => {
+export const ToDos = ({ navigation }: any) => {
   const styles = useDynamicStyleSheet(themedStyles);
 
   const [taskItems, setTaskItems] = React.useState<ToDo[]>([]);
@@ -69,6 +69,10 @@ export const ToDos = () => {
                 ? "item"
                 : "items"
             }
+          />
+          <Button
+            onPress={() => navigation.navigate("Page2")}
+            title="Go to Carousel"
           />
         </View>
 
